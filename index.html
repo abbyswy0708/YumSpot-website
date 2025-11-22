@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>YumSpots — Food Website</title>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:Inter,Arial;
+  background:linear-gradient(180deg, #f0ddbf, #e4b326, #b22a2a);
+  color:#000;
+  padding:30px;
+  display:flex;
+  justify-content:center;
+  position:relative;
+}
+body::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:url("https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1600&q=80") center/cover no-repeat;
+  opacity:0.15; 
+  z-index:-1;
+}
+
+.site{width:100%;max-width:1100px}
+header{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
+h1{font-size:26px}
+nav{margin:20px 0;display:flex;gap:10px;flex-wrap:wrap}
+.tab{
+  padding:10px 14px;
+  border-radius:8px;
+  background:#ffe0b0;
+  cursor:pointer;
+  color:#000;
+  transition: transform 0.2s, background 0.3s;
+}
+.tab:hover{transform: scale(1.05);}
+.tab.active{
+  background:#b22a2a;
+  color:#fff;
+  font-weight:600;
+}
+.section{display:none; opacity:0; transition: opacity 0.5s ease;}
+.section.active{display:block; opacity:1;}
+.menu{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-top:20px}
+.card{background:#fff2e6;padding:12px;border-radius:12px;position:relative;overflow:hidden}
+.thumb{width:100%;height:150px;object-fit:cover;border-radius:10px;margin-bottom:10px;display:block}
+
+/* Feedback form */
+form{background:#fff2e6;padding:20px;border-radius:12px;display:flex;flex-direction:column;gap:12px}
+input,textarea{padding:10px;border-radius:8px;border:0;background:#f7e5d0;color:#000}
+button{padding:10px;border-radius:8px;border:0;background:#b22a2a;color:#fff;font-weight:bold;cursor:pointer}
+
+/* Intro styling */
+.intro-box{background: rgba(255,255,255,0.85); padding:30px; border-radius:12px; text-align:center; position:relative; overflow:hidden;}
+.intro-box h2{color:#b22a2a;margin-bottom:20px;}
+.intro-box p{margin-bottom:20px;}
+.intro-box ul{list-style:disc; text-align:left; margin-left:20px;}
+
+/* Floating emoji animation */
+.emoji{
+  position:absolute;
+  font-size:28px;
+  animation: floatUp 4s ease-in-out forwards;
+  opacity:1;
+  pointer-events:none;
+}
+@keyframes floatUp{
+  0% { transform: translateY(0) scale(0.5); opacity:1; }
+  25% { transform: translateY(-80px) scale(1); opacity:1; }
+  50% { transform: translateY(-180px) scale(1.2); opacity:1; }
+  75% { transform: translateY(-260px) scale(1); opacity:1; }
+  100% { transform: translateY(-350px) scale(0.8); opacity:0; }
+}
+
+/* Tab click bounce effect */
+.tab-click{
+  animation: clickBounce 0.3s ease;
+}
+@keyframes clickBounce{
+  0%{transform:scale(1)}
+  50%{transform:scale(1.15)}
+  100%{transform:scale(1)}
+}
+</style>
+</head>
+<body>
+<div class="site">
+
+<header>
+  <h1>YumSpots</h1>
+</header>
+
+<!-- Tabs -->
+<nav>
+  <div class="tab active" data-tab="intro">🏠 Intro</div>
+  <div class="tab" data-tab="t1">🍕 Pizza</div>
+  <div class="tab" data-tab="t2">🍔 Burgers</div>
+  <div class="tab" data-tab="t3">🍹 Drinks</div>
+  <div class="tab" data-tab="t4">🍟 Snacks</div>
+  <div class="tab" data-tab="t5">📝 Feedback</div>
+</nav>
+
+<!-- Sections -->
+
+<!-- Intro -->
+<div id="intro" class="section active">
+  <div class="intro-box">
+    <h2>Welcome to YumSpots!</h2>
+    <img class="thumb" src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092?auto=format&fit=crop&w=800&q=80" 
+         alt="Delicious Food" style="margin-bottom:20px; height:200px; object-fit:cover;">
+    <p>Discover a world of flavors at YumSpots! From cheesy pizzas to juicy burgers, refreshing drinks, and crispy snacks — we have it all. 🍕🍔🍹🍟</p>
+    
+    <h3 style="margin-top:20px; color:#b22a2a;">Why Choose YumSpots?</h3>
+    <ul style="text-align:left; margin-left:20px; margin-top:10px; color:#000;">
+      <li>Fresh ingredients, cooked to perfection.</li>
+      <li>Wide variety of dishes for everyone.</li>
+      <li>Fun and friendly atmosphere to enjoy your meals.</li>
+      <li>Quick and easy online ordering with smiley service!</li>
+    </ul>
+
+    <h3 style="margin-top:20px; color:#b22a2a;">Explore Our Menu</h3>
+    <p>Have a look now at our <strong>Recommended</strong>, <strong>Burgers</strong>, <strong>Drinks</strong>, and <strong>Snacks</strong>. Each dish has its unique flavor and calorie info for your tracking! 🍽️</p>
+  </div>
+</div>
+
+<!-- Pizza -->
+<div id="t1" class="section">
+  <h2>Pizza</h2>
+  <div class="menu">
+    <div class="card">
+      <img class="thumb" src="https://images.unsplash.com/photo-1712652080841-9e480a2c43ec?ixlib=rb-4.1.0&q=85&fm=jpg" alt="Cheese Pizza" />
+      <h3>Cheese Pizza</h3>
+      <p>Golden-baked pizza with melted mozzarella cheese and a crispy crust. Perfect for cheese lovers! <strong>Calories:</strong> 320 kcal</p>
+    </div>
+    <div class="card">
+      <img class="thumb" src="https://images.unsplash.com/photo-1628840042765-356cda07504e?ixlib=rb-4.1.0&q=85&fm=jpg" alt="Pepperoni Pizza" />
+      <h3>Pepperoni Pizza</h3>
+      <p>Spicy pepperoni slices on top of gooey cheese. Full of flavor and satisfaction. <strong>Calories:</strong> 350 kcal</p>
+    </div>
+    <div class="card">
+      <img class="thumb" src="https://images.unsplash.com/photo-1734769484424-36b99dd84818?ixlib=rb-4.1.0&q=85&fm=jpg" alt="BBQ Chicken Pizza" />
+      <h3>BBQ Chicken Pizza</h3>
+      <p>Grilled chicken with smoky BBQ sauce, melted cheese, and fresh veggies. <strong>Calories:</strong> 400 kcal</p>
+    </div>
+    <div class="card">
+      <img class="thumb" src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?ixlib=rb-4.1.0&q=85&fm=jpg" alt="Hawaiian Pizza" />
+      <h3>Hawaiian Pizza</h3>
+      <p>Sweet pineapple meets savory ham on a cheesy, golden crust. <strong>Calories:</strong> 370 kcal</p>
+    </div>
+  </div>
+</div>
+
+<!-- Burgers -->
+<div id="t2" class="section">
+  <h2>Burgers</h2>
+  <div class="menu">
+    <div class="card">
+      <img class="thumb" src="https://images.unsplash.com/photo-1615297928064-24977384d0da?ixlib=rb-4.1.0&q=85&fm=jpg" alt="Chicken Burger" />
+      <h3>Chicken Burger</h3>
+      <p>Juicy grilled chicken patty with lettuce, tomato, and creamy sauce in a soft bun. <strong>Calories:</strong> 450 kcal</p>
+    </div>
+    <div class="card">
+      <img class="thumb" src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?ixlib=rb-4.1.0&q=85&fm=jpg" alt="Beef Burger" />
+      <h3>Beef Burger</h3>
+      <p>Classic beef patty with melted cheese, fresh lettuce, tomato, and special sauce. <strong>Calories:</strong> 500 kcal</p>
+    </div>
+    <div class="card">
+      <img class="thumb" src="https://images.unsplash.com/photo-1571091718767-18b5b1457add?ixlib=rb-4.1.0&q=85&fm=jpg" alt="Veggie Burger" />
+      <h3>Veggie Burger</h3>
+      <p>Vegetarian patty with fresh vegetables, sauces, and soft bun. Tasty and healthy! <strong>Calories:</strong> 380 kcal</p>
+    </div>
+    <div class="card">
+      <img class="thumb" src="https://images.unsplash.com/photo-1605789538467-f715d58e03f9?ixlib=rb-4.1.0&q=85&fm=jpg" alt="Cheeseburger" />
+      <h3>Cheeseburger</h3>
+      <p>Beef patty with gooey melted cheese, fresh veggies, and ketchup. <strong>Calories:</strong> 520 kcal</p>
+    </div>
+    <div class="card">
+      <img class="thumb" src="https://images.unsplash.com/photo-1572802419224-296b0aeee0d9?ixlib=rb-4.1.0&q=85&fm=jpg&crop=entropy&cs=srgb&dl=amirali-mirhashemian-jh5XyK4Rr3Y-unsplash.jpg" alt="Double Burger" />
+      <h3>Double Burger</h3>
+      <p>Two beef patties stacked with cheese, bacon, and fresh veggies. <strong>Calories:</strong> 680 kcal</p>
+    </div>
+  </div>
+</div>
+
+<!-- Drinks -->
+<div id="t3" class="section">
+  <h2>Drinks</h2>
+  <div class="menu">
+    <div class="card">
+      <img class="thumb" src="https://images.unsplash.com/photo-1588413335672-87b35888b55d?ixlib=rb-4.1.0&q=85&fm=jpg" alt="Coconut Shake" />
+      <h3>Coconut Shake</h3>
+      <p>Creamy and refreshing coconut shake. Perfect to cool down. <strong>Calories:</strong> 180 kcal</p>
+    </div>
+    <div class="card">
+      <img class="thumb" src="https://images.unsplash.com/photo-1525385133512-2f3bdd039054?ixlib=rb-4.1.0&q=85&fm=jpg" alt="Mango Smoothie" />
+      <h3>Mango Smoothie</h3>
+      <p>Fresh mango blended with yogurt and ice. Sweet and tropical! <strong>Calories:</strong> 160 kcal</p>
+    </div>
+    <div class="card">
+      <img class="thumb" src="https://images.unsplash.com/photo-1653852883277-c4b4b9e020e5?ixlib=rb-4.1.0&q=85&fm=jpg" alt="Chocolate Milkshake" />
+      <h3>Chocolate Milkshake</h3>
+      <p>Rich chocolate flavor blended with creamy milk. A treat for chocoholics! <strong>Calories:</strong> 250 kcal</p>
+    </div>
+    <div class="card">
+      <img class="thumb" src="https://images.unsplash.com/photo-1523677011781-c91d1bbe2f9e?ixlib=rb-4.1.0&q=85&fm=jpg" alt="Lemonade" />
+      <h3>Lemonade</h3>
+      <p>Refreshing sour drink with a hint of sweetness. Great for sunny days! <strong>Calories:</strong> 90 kcal</p>
+    </div>
+    <div class="card">
+      <img class="thumb" src="https://images.unsplash.com/photo-1579954115545-a95591f28bfc?ixlib=rb-4.1.0&q=85&fm=jpg&crop=entropy&cs=srgb&dl=sebastian-coman-photography-rwBJaJdesGg-unsplash.jpg" alt="Strawberry Smoothie" />
+      <h3>Strawberry Smoothie</h3>
+      <p>Sweet strawberries blended with milk and ice for a creamy delight. <strong>Calories:</strong> 150 kcal</p>
+    </div>
+  </div>
+</div>
+
+<!-- Snacks -->
+<div id="t4" class="section">
+  <h2>Snacks</h2>
+  <div class="menu">
+    <div class="card">
+      <img class="thumb" src="https://images.unsplash.com/photo-1630384060421-cb20d0e0649d?ixlib=rb-4.1.0&q=85&fm=jpg" alt="French Fries" />
+      <h3>French Fries</h3>
+      <p>Crispy, golden, and perfectly seasoned. Great for sharing! <strong>Calories:</strong> 300 kcal</p>
+    </div>
+    <div class="card">
+      <img class="thumb" src="https://images.unsplash.com/photo-1734774924912-dcbb467f8599?ixlib=rb-4.1.0&q=85&fm=jpg" alt="Mozzarella Sticks" />
+      <h3>Mozzarella Sticks</h3>
+      <p>Crispy golden-fried sticks filled with gooey melted cheese. <strong>Calories:</strong> 280 kcal</p>
+    </div>
+    <div class="card">
+      <img class="thumb" src="https://images.unsplash.com/photo-1639024471283-03518883512d?ixlib=rb-4.1.0&q=85&fm=jpg" alt="Onion Rings" />
+      <h3>Onion Rings</h3>
+      <p>Crispy fried onion rings, perfect for snacking with dips. <strong>Calories:</strong> 260 kcal</p>
+    </div>
+    <div class="card">
+      <img class="thumb" src="https://images.unsplash.com/photo-1619604107557-b5321217aee7?ixlib=rb-4.1.0&q=85&fm=jpg" alt="Nachos" />
+      <h3>Nachos</h3>
+      <p>Tortilla chips topped with melted cheese, salsa, and jalapeños. <strong>Calories:</strong> 320 kcal</p>
+    </div>
+    <div class="card">
+      <img class="thumb" src="https://images.unsplash.com/photo-1619881590738-a111d176d906?ixlib=rb-4.1.0&q=85&fm=jpg&crop=entropy&cs=srgb&dl=brett-jordan-TEplqAWpCIs-unsplash.jpg" alt="Chicken Nuggets" />
+      <h3>Chicken Nuggets</h3>
+      <p>Golden fried bite-sized chicken pieces. Perfect for dipping! <strong>Calories:</strong> 350 kcal</p>
+    </div>
+  </div>
+</div>
+
+<!-- Feedback -->
+<div id="t5" class="section">
+  <h2>Feedback Form</h2>
+  <p>We'd love to hear from you! Share your thoughts about YumSpots and your favorite dishes. 🍕🍔🍹🍟</p>
+  <form>
+    <input type="text" placeholder="Your Name" required />
+    <input type="email" placeholder="Email" required />
+    <textarea rows="4" placeholder="Your Feedback" required></textarea>
+    <button type="submit">Submit</button>
+  </form>
+</div>
+
+</div>
+
+<script>
+const tabs = document.querySelectorAll('.tab');
+const sections = document.querySelectorAll('.section');
+
+tabs.forEach(t => {
+  t.addEventListener('click', () => {
+    // Tab click animation
+    t.classList.add('tab-click');
+    setTimeout(()=>{t.classList.remove('tab-click');},300);
+
+    tabs.forEach(x => x.classList.remove('active'));
+    t.classList.add('active');
+    const id = t.getAttribute('data-tab');
+    sections.forEach(s => s.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+  });
+});
+
+// Floating emoji animation in Intro + other tabs except Feedback
+const foodEmojis = ["🍕","🍔","🍹","🍟","🌭","🍩","🍫"];
+function createFloatingEmojis(container){
+  const emoji = document.createElement("div");
+  emoji.className = "emoji";
+  emoji.style.left = Math.random() * container.offsetWidth + "px";
+  emoji.style.top = container.offsetHeight + "px"; // Start from bottom
+  emoji.textContent = foodEmojis[Math.floor(Math.random()*foodEmojis.length)];
+  container.appendChild(emoji);
+  setTimeout(()=>{ emoji.remove(); },4000);
+}
+
+// Apply floating emojis to all sections except Feedback
+const menuSections = ["intro","t1","t2","t3","t4"];
+menuSections.forEach(id=>{
+  const container = document.getElementById(id);
+  setInterval(()=>createFloatingEmojis(container), 600);
+});
+</script>
+
+</body>
+</html>
